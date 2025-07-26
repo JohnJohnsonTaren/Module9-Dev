@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class HttpStatusImageDownloader {
-    private static final byte [] buffer = new byte[4096];
+    private static final int BUFFER_SIZE = 4096;
     private HttpStatusChecker statusChecker;
 
     public HttpStatusImageDownloader() {
@@ -30,6 +30,8 @@ public class HttpStatusImageDownloader {
 
             URL url = new URL(imageUrl);
 
+            byte[] buffer = new byte[BUFFER_SIZE];
+
             try(InputStream in = url.openStream();
                 FileOutputStream fos = new FileOutputStream(code + ".jpg")) {
                 int bytesRead;
@@ -43,3 +45,4 @@ public class HttpStatusImageDownloader {
         }
     }
 }
+
