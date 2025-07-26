@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.net.HttpURLConnection.HTTP_OK;
+
 public class HttpStatusChecker {
     public String getStatusImage(int code) throws IOException {
         String imageUrl = "https://http.cat" + code + ".jpg";
@@ -23,9 +26,9 @@ public class HttpStatusChecker {
 
         int responseCode = connection.getResponseCode();
 
-        if (responseCode == 200) {
+        if (responseCode == HTTP_OK) {
             return imageUrl;
-        } else if (responseCode == 404) {
+        } else if (responseCode == HTTP_NOT_FOUND) {
             throw new IOException("Image not found for status code " + code);
         }
         return imageUrl;

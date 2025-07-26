@@ -27,17 +27,24 @@ public class HttpImageStatusCli {
     public void askStatus() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter HTTP status code: ");
-        String input = scanner.nextLine();
 
-        try {
-            int code = Integer.parseInt(input);
-            imageDownloader.downloadStatusImage(code);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid number.");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            scanner.close();
+        while (true) {
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            try {
+                int code = Integer.parseInt(input);
+                imageDownloader.downloadStatusImage(code);
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
+        scanner.close();
     }
 }
+
