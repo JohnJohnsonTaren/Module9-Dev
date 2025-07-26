@@ -37,7 +37,12 @@ public class HttpImageStatusCli {
 
             try {
                 int code = Integer.parseInt(input);
-                imageDownloader.downloadStatusImage(code);
+
+                if (code == 418) {
+                    System.out.println("Сервер не може приготувати каву, тому що він чайник");
+                } else if (code == 420) {
+                    System.out.println("Зміцніть свій спокій");
+                } imageDownloader.downloadStatusImage(code);
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
             } catch (IOException ex) {
